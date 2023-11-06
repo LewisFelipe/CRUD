@@ -12,32 +12,35 @@ include("./layout/header.php");
 $dbObj = new mysql();
 $sql = "";
 $sql .= " SELECT * FROM produto ";
-if (isset($_GET["key"])) {
+if (isset($_GET["key"]))
+{
 	$sql .= " WHERE nome LIKE '%".$_GET["key"]."%' ";
 }
 $sql .= " ORDER BY nome; ";
 $result = $dbObj->query($sql);
-if ($result) {
-	?>
+if ($result)
+{
+?>
 	<table border="1px">
 		<tr>
 			<th>Nome</th>
 			<th>Preco</th>
 			<th>Favorito</th>
 		</tr>
-		<?php
-		while ($row = mysqli_fetch_assoc($result)) {
-			?>
+<?php
+		while ($row = mysqli_fetch_assoc($result))
+		{
+?>
 			<tr>
 				<td><?=$row["nome"];?></td>
 				<td><?=$row["preco"];?></td>
 				<td><a href="">adicionar</a></td>
 			</tr>
-			<?php
+<?php
 		}
-		?>
+?>
 	</table>
-	<?php
+<?php
 }
 ?>
 

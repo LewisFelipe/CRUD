@@ -5,22 +5,27 @@ include("./function/session.php");
 
 validaSessao();
 
-if (isset($_GET["id"])) {
+if(isset($_GET["id"]))
+{
 	$dbObj = new mysql();
 	$sql = "SELECT * FROM produto WHERE id = '".$_GET["id"]."';";
 	$result = $dbObj->query($sql);
-	if ($result) {
-		if ($row = mysqli_fetch_assoc($result)) {
+	if($result)
+	{
+		if($row = mysqli_fetch_assoc($result))
+		{
 			$produto = $row;
 		}
 	}
 }
-if (!isset($produto["id"])) {
+if(!isset($produto["id"]))
+{
 	header("Location: ./produtos.php");
 	exit;
 }
 
-if (isset($_GET["confirm"])) {
+if(isset($_GET["confirm"]))
+{
 	$dbObj = new mysql();
 	$sql = "DELETE FROM produto WHERE id = '".$_GET["id"]."';";
 	$result = $dbObj->query($sql);

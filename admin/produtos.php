@@ -14,8 +14,9 @@ include("./layout/menu.php");
 $dbObj = new mysql();
 $sql = "SELECT * FROM produto ORDER BY nome;";
 $result = $dbObj->query($sql);
-if ($result) {
-	?>
+if ($result)
+{
+?>
 	<table border="1px">
 		<tr>
 			<th>Nome</th>
@@ -23,20 +24,21 @@ if ($result) {
 			<th>Editar</th>
 			<th>Apagar</th>
 		</tr>
-		<?php
-		while ($row = mysqli_fetch_assoc($result)) {
-			?>
+<?php
+		while ($row = mysqli_fetch_assoc($result))
+		{
+?>
 			<tr>
 				<td><?=$row["nome"];?></td>
 				<td><?=$row["preco"];?></td>
 				<td><a href="./produto.php?id=<?=$row["id"];?>" style="color: white;">editar</a></td>
 				<td><a href="./apagar.php?id=<?=$row["id"];?>" style="color: white;">apagar</a></td>
 			</tr>
-			<?php
+<?php
 		}
-		?>
+?>
 	</table>
-	<?php
+<?php
 }
 ?>
 

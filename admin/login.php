@@ -3,8 +3,10 @@
 include("../conf/config.php");
 include("./function/session.php");
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-	if (contaValida($_POST["username"], $_POST["password"])) {
+if($_SERVER["REQUEST_METHOD"] == "POST")
+{
+	if(contaValida($_POST["username"], $_POST["password"]))
+	{
 		registraConta($_POST["username"]);
 		header("Location: ./index.php");
 		exit;
@@ -14,7 +16,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 include("./layout/header.php");
-
 ?>
 
 <form name="formLogin" method="POST">
@@ -48,9 +49,12 @@ include("./layout/header.php");
 </form>
 <script language="JavaScript" type="text/javascript">
 	<!--
-	if (document.formLogin.username.value) {
+	if(document.formLogin.username.value)
+	{
 		document.formLogin.password.focus();
-	} else {
+	}
+	else
+	{
 		document.formLogin.username.focus();
 	}
 	//-->

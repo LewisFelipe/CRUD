@@ -4,13 +4,18 @@ include("./function/session.php");
 validaSessao();
 
 include("./function/validation.php");
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+if ($_SERVER["REQUEST_METHOD"] == "POST")
+{
 	extract($_POST);
-	if (validateProduto($_POST, $error)) {
+	if(validateProduto($_POST, $error))
+	{
 		$dbObj = new mysql();
-		if (isset($_POST["id"]) && ($_POST["id"] > 0)) {
+		if(isset($_POST["id"]) && ($_POST["id"] > 0))
+		{
 			$sql = "UPDATE produto SET nome = '".$nome."', preco = '".$preco."' WHERE id = '".$id."'";
-		} else {
+		}
+		else
+		{
 			$sql = "INSERT INTO produto (nome, preco) VALUES ('".$nome."', '".$preco."')";
 		}
 		$result = $dbObj->query($sql);
@@ -19,12 +24,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	}
 }
 
-if (isset($_GET["id"])) {
+if(isset($_GET["id"]))
+{
 	$dbObj = new mysql();
 	$sql = "SELECT * FROM produto WHERE id = '".$_GET["id"]."';";
 	$result = $dbObj->query($sql);
-	if ($result) {
-		if ($row = mysqli_fetch_assoc($result)) {
+	if($result)
+	{
+		if($row = mysqli_fetch_assoc($result))
+		{
 			extract($row);
 		}
 	}
