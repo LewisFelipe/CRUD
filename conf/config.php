@@ -1,6 +1,6 @@
 <?php
 
-	define("SITE_SUBFOLDER", "/CRUD");
+	define("SITE_SUBFOLDER", "/webdev/CRUD");
 	define("SITE_ROOT", $_SERVER["DOCUMENT_ROOT"].SITE_SUBFOLDER);
 	define("SITE_URL", "http://".$_SERVER["SERVER_NAME"].SITE_SUBFOLDER);
 

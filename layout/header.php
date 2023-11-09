@@ -12,4 +12,4 @@
 
         <title>LAB III DICIONÁRIO</title>
 	</head>
-    <body style="background: url(bg-01.jpg) no-repeat; background-size: cover;">
+    <body style="background: url(./resources/img/bg-01.jpg) no-repeat; background-size: cover;">

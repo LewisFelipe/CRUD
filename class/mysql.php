@@ -17,7 +17,7 @@
 			}
 		}
 
-	function query($query)
+		function query($query)
 		{
 			$result = mysqli_query($this->link_id, $query);
 			if (!$result) {
