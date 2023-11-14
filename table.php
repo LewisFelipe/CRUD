@@ -1,5 +1,5 @@
 <?php
-include("../conf/config.php");
+include("./conf/config.php");
 include("./function/session.php");
 validaSessao();
 include("./layout/header.php");

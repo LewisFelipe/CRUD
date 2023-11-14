@@ -1,6 +1,6 @@
 <?php
 
-include("../conf/config.php");
+include("./conf/config.php");
 include("./function/session.php");
 
 validaSessao();
@@ -40,8 +40,8 @@ include("./layout/menu.php");
 
 <h1>Apagar Palavra "<?=$dicionario["palavra"];?>"?</h1>
 
-<a href="./delete.php?id=<?=$dicionario["id"];?>&confirm=yes"><img src="./layout/confirm.jpg"></a>
-<a href="./table.php"><img src="./layout/cancel.jpg"></a>
+<a href="./delete.php?id=<?=$dicionario["id"];?>&confirm=yes">Confirmar</a>
+<a href="./table.php">Cancelar</a>
 
 <?php
 include("./layout/footer.php");

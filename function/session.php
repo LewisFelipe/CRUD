@@ -22,7 +22,7 @@ function registraConta($username)
 	{
 		if ($row = mysqli_fetch_assoc($result))
 		{
-			$_SESSION["CONTA_ID"] = $row["id"];
+			$_SESSION["id"] = $row["id"];
 		}
 	}
 }
@@ -39,7 +39,7 @@ function logout()
 function validaSessao()
 {
 	session_start();
-	if (empty($_SESSION["CONTA_ID"]))
+	if (empty($_SESSION["id"]))
 	{
 		header("Location: ./login.php");
 		exit;

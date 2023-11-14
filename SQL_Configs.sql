@@ -1,3 +1,10 @@
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+CREATE DATABASE IF NOT EXISTS `labiii` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `labiii`;
+
 CREATE TABLE `labiii`.`conta`(
     `id` INT(3) NOT NULL AUTO_INCREMENT,
     `usuario` VARCHAR(50) NOT NULL,
