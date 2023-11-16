@@ -11,7 +11,22 @@
         <!-- Font Awesome -->
         <!-- <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous"> -->
 
+        <style>
+            body{
+                background: url(./resources/img/bg-01.jpg) no-repeat;
+                background-size: cover;
+            }
+
+            footer{
+                position: fixed;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.6);
+                width: 100%;
+                text-align: center;
+            }
+        </style>
+
         <title>LAB III DICIONÁRIO</title>
     </head>
 
-    <body style="background: url(./resources/img/bg-01.jpg) no-repeat; background-size: cover;">
+    <body>

@@ -1,4 +1,8 @@
-		<footer><strong>POWERED BY FATEC BAURU</strong></footer>
+        <footer>
+            <div class="conteiner">
+                <span class="display-4 text-muted"><strong>POWERED BY FATEC BAURU</strong></span>
+            </div>
+        </footer>
 
 		<!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

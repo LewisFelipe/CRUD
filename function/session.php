@@ -1,12 +1,14 @@
 <?php
+function encodePassword($username, $password) { return hash('sha256', ($password . "+" . substr($username, 0, 3))); }
+
 function contaValida($username, $password)
 {
 	$dbObj = new mysql();
-	$sql = "SELECT * FROM conta WHERE usuario = '".$username."' AND senha = MD5('$password')";
+	$sql = "SELECT * FROM conta WHERE usuario = '".$username."' AND senha = '".encodePassword($username, $password)."'";
 	$result = $dbObj->query($sql);
 	if($result)
 	{
-		if ($row = mysqli_fetch_assoc($result)) { return true; }
+		if($row = mysqli_fetch_assoc($result)) { return true; }
 	}
 	return false;
 }
@@ -18,9 +20,9 @@ function registraConta($username)
 	$dbObj = new mysql();
 	$sql = "SELECT * FROM conta WHERE usuario = '".$username."'";
 	$result = $dbObj->query($sql);
-	if ($result)
+	if($result)
 	{
-		if ($row = mysqli_fetch_assoc($result))
+		if($row = mysqli_fetch_assoc($result))
 		{
 			$_SESSION["id"] = $row["id"];
 		}
@@ -39,7 +41,7 @@ function logout()
 function validaSessao()
 {
 	session_start();
-	if (empty($_SESSION["id"]))
+	if(empty($_SESSION["id"]))
 	{
 		header("Location: ./login.php");
 		exit;

@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 				VALUES ('".$idDisciplina."', '".$palavraIngles."', '".$palavra."', '".$significado."')";
 		}
 		$result = $dbObj->query($sql);
-		header("Location: ./table.php");
+		header("Location: ./palavras.php");
 		exit;
 	}
 }
