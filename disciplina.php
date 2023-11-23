@@ -50,7 +50,7 @@ include("./layout/header.php");
 include("./layout/menu.php");
 ?>
 
-<h1 class="display-3 text-light text-center mb-5"><strong>DICIONÁRIO</strong></h1>
+<h1 class="display-3 text-light text-center mb-5"><strong>DISCIPLINA</strong></h1>
 
 <?php
 if (isset($error)) {
