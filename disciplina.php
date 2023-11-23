@@ -13,14 +13,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		if(isset($_POST["id"]) && ($_POST["id"] > 0))
 		{
 			$sql = "UPDATE disciplina
-				SET name = '".$nomeDisciplina."' WHERE id = '".$id."'";
+				SET name = '%s' WHERE id = '".$id."'";
 		}
 		else
 		{
 			$sql = "INSERT INTO disciplina(name)
-				VALUES('".$nomeDisciplina."')";
+				VALUES('%s')";
 		}
-		$result = $dbObj->query($sql);
+		$query = sprintf($sql, mysqli_real_escape_string($dbObj->link_id, $name));
+		$result = $dbObj->query($query);
+
+		$dbObj->close(); // Fecha a ligação com o Banco de Dados
+
 		header("Location: ./disciplinas.php");
 		exit;
 	}
@@ -38,13 +42,15 @@ if(isset($_GET["id"]))
 			extract($row);
 		}
 	}
+
+	$dbObj->close(); // Fecha a ligação com o Banco de Dados
 }
 
 include("./layout/header.php");
 include("./layout/menu.php");
 ?>
 
-<h1>DICIONÁRIO</h1>
+<h1 class="display-3 text-light text-center mb-5"><strong>DICIONÁRIO</strong></h1>
 
 <?php
 if (isset($error)) {
@@ -54,35 +60,19 @@ if (isset($error)) {
 }
 ?>
 
-<form method="POST">
-	<input type="hidden" name="id" value="<?=isset($id)?$id:"";?>">
-	<table>
-		<tr>
-			<td>
-				ID:
-			</td>
-			<td>
-				<p><?=isset($id)?$id:"";?></p>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Disciplina:
-			</td>
-			<td>
-				<input type="text" name="nomeDisciplina" value="<?=isset($nomeDisciplina)?$nomeDisciplina:"";?>">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				&nbsp;
-			</td>
-			<td>
-				<input type="submit">
-			</td>
-		</tr>
-	</table>
-</form>
+<section class="container d-flex p-auto align-middle rounded-container">
+	<form method="POST" class="w-100 h-100 p-5">
+		<div class="form-group align-self-strech">
+			<label><strong>ID:</strong></label>
+			<span class="form-control"><b><?=isset($id)?$id:"";?></b></span>
+		</div>
+		<div class="form-group align-self-strecth">
+			<label for="name"><strong>Disciplina:</strong></label>
+			<input class="form-control" type="text" name="name" value="<?=isset($name)?$name:"";?>">
+		</div>
+		<input class="btn btn-primary mt-4 w-100" type="submit">
+	</form>
+</section>
 
 <?php
 include("./layout/footer.php");

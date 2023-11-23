@@ -8,7 +8,7 @@ validaSessao();
 if(isset($_GET["id"]))
 {
 	$dbObj = new mysql();
-	$sql = "SELECT * FROM dicionario WHERE id = '".$_GET["id"]."';";
+	$sql = "SELECT * FROM dicionario WHERE dicionario.id = '".$_GET["id"]."';";
 	$result = $dbObj->query($sql);
 	if($result)
 	{
@@ -43,14 +43,10 @@ include("./layout/menu.php");
 
 ?>
 
-<section>
-	<div class="rounded-container text-center p-4 center" style="min-height: 120px;">
-		<h1>Apagar Palavra "<?=$dicionario["palavra"];?>"?</h1>
+<h1>Apagar Palavra "<?=$dicionario["palavra"];?>"?</h1>
 
-		<a class="btn btn-dark" href="./delete.php?id=<?=$dicionario["id"];?>&confirm=yes">Confirmar</a>
-		<a class="btn btn-dark" href="./palavras.php">Cancelar</a>
-	</div>
-</section>
+<a href="./delete.php?id=<?=$dicionario["id"];?>&confirm=yes">Confirmar</a>
+<a href="./palavras.php">Cancelar</a>
 
 <?php
 include("./layout/footer.php");

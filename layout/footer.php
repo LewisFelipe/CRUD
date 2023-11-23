@@ -1,6 +1,6 @@
-        <footer>
+        <footer class="font-small">
             <div class="conteiner">
-                <span class="display-4 text-muted"><strong>POWERED BY FATEC BAURU</strong></span>
+                <span class="text-muted"><strong>POWERED BY FATEC BAURU</strong></span>
             </div>
         </footer>
 

@@ -13,15 +13,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 		if(isset($_POST["id"]) && ($_POST["id"] > 0))
 		{
 			$sql = "UPDATE dicionario
-				SET id_disciplina = '".$idDisciplina."', palavra_ingles = '".$palavraIngles."', palavra = '".$palavra."' , significado = '".$significado."'
+				SET id_disciplina = '%s', palavra_ingles = '%s', palavra = '%s' , significado = '%s'
 				WHERE id = '".$id."'";
 		}
 		else
 		{
 			$sql = "INSERT INTO dicionario (id_disciplina, palavra_ingles, palavra, significado)
-				VALUES ('".$idDisciplina."', '".$palavraIngles."', '".$palavra."', '".$significado."')";
+				VALUES ('%s', '%s', '%s', '%s')";
 		}
-		$result = $dbObj->query($sql);
+		$query = sprintf($sql, mysqli_real_escape_string($dbObj->link_id, $id_disciplina), mysqli_real_escape_string($dbObj->link_id, $palavra_ingles), mysqli_real_escape_string($dbObj->link_id, $palavra), mysqli_real_escape_string($dbObj->link_id, $significado));
+		$result = $dbObj->query($query);
+
+		$dbObj->close(); // Fecha a ligação com o Banco de Dados
+
 		header("Location: ./palavras.php");
 		exit;
 	}
@@ -39,13 +43,15 @@ if(isset($_GET["id"]))
 			extract($row);
 		}
 	}
+
+	$dbObj->close(); // Fecha a ligação com o Banco de Dados
 }
 
 include("./layout/header.php");
 include("./layout/menu.php");
 ?>
 
-<h1>DICIONÁRIO</h1>
+<h1 class="display-3 text-light text-center mb-auto"><strong>DICIONÁRIO</strong></h1>
 
 <?php
 if (isset($error)) {
@@ -55,51 +61,27 @@ if (isset($error)) {
 }
 ?>
 
-<form method="POST">
-	<input type="hidden" name="id" value="<?=isset($id)?$id:"";?>">
-	<table>
-		<tr>
-			<td>
-				Disciplina(ID):
-			</td>
-			<td>
-				<input type="text" name="idDisciplina" value="<?=isset($idDisciplina)?$idDisciplina:"";?>">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Palavra em Inglês:
-			</td>
-			<td>
-				<input type="text" name="palavraIngles" value="<?=isset($palavraIngles)?$palavraIngles:"";?>">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Palavra:
-			</td>
-			<td>
-				<input type="text" name="palavra" value="<?=isset($palavra)?$palavra:"";?>">
-			</td>
-		</tr>
-		<tr>
-			<td>
-				Significado:
-			</td>
-			<td>
-				<textarea name="significado" value="<?=isset($significado)?$significado:"";?>"></textarea>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				&nbsp;
-			</td>
-			<td>
-				<input type="submit">
-			</td>
-		</tr>
-	</table>
-</form>
+<section class="container d-flex p-auto align-middle rounded-container" style="min-height: 500px;">
+	<form method="POST" class="w-100 h-100 p-5">
+		<div class="form-group align-self-strech">
+			<label for="palavra"><strong>Disciplina(ID):</strong></label>
+			<input class="form-control" type="text" name="id_disciplina" value="<?=isset($id_disciplina)?$id_disciplina:"";?>">
+		</div>
+		<div class="form-group align-self-strech">
+			<label for="palavra"><strong>Palavra em Inglês:</strong></label>
+			<input class="form-control" type="text" name="palavra_ingles" value="<?=isset($palavra_ingles)?$palavra_ingles:"";?>">
+		</div>
+		<div class="form-group align-self-strech">
+			<label for="palavra"><strong>Palavra:</strong></label>
+			<input class="form-control" type="text" name="palavra" value="<?=isset($palavra)?$palavra:"";?>">
+		</div>
+		<div class="form-group align-self-strecth">
+			<label for="significado"><strong>Significado:</strong></label>
+			<textarea class="form-control" rows="2" name="significado"><?=isset($significado)?$significado:"";?></textarea>
+		</div>
+		<input class="btn btn-primary mt-4 w-100" w type="submit">
+	</form>
+</section>
 
 <?php
 include("./layout/footer.php");

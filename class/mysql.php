@@ -25,5 +25,7 @@
 			$this->result = $result;
 			return $this->result;
 		}
+
+		function close() { mysqli_close($this->link_id); }
 	}
 ?>

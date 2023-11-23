@@ -4,12 +4,16 @@ function encodePassword($username, $password) { return hash('sha256', ($password
 function contaValida($username, $password)
 {
 	$dbObj = new mysql();
-	$sql = "SELECT * FROM conta WHERE usuario = '".$username."' AND senha = '".encodePassword($username, $password)."'";
-	$result = $dbObj->query($sql);
+	$sql = "SELECT * FROM conta WHERE usuario = '%s' AND senha = '".encodePassword($username, $password)."'";
+	$query = sprintf($sql, mysqli_real_escape_string($dbObj->link_id, $username)); //Segurança contra SQL-Injection
+	$result = $dbObj->query($query);
 	if($result)
 	{
 		if($row = mysqli_fetch_assoc($result)) { return true; }
 	}
+
+	$dbObj->close(); // Fecha a ligação com o Banco de Dados
+
 	return false;
 }
 
@@ -18,8 +22,9 @@ function registraConta($username)
 	session_start();
 	session_unset();
 	$dbObj = new mysql();
-	$sql = "SELECT * FROM conta WHERE usuario = '".$username."'";
-	$result = $dbObj->query($sql);
+	$sql = "SELECT * FROM conta WHERE usuario = '%s'";
+	$query = sprintf($sql, mysqli_real_escape_string($dbObj->link_id, $username)); //Segurança contra SQL-Injection
+	$result = $dbObj->query($query);
 	if($result)
 	{
 		if($row = mysqli_fetch_assoc($result))
@@ -27,6 +32,8 @@ function registraConta($username)
 			$_SESSION["id"] = $row["id"];
 		}
 	}
+
+	$dbObj->close(); // Fecha a ligação com o Banco de Dados
 }
 
 function logout()
